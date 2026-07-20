@@ -25,7 +25,7 @@ jobs:
           --health-timeout=5s
           --health-retries=3
 
-    steps: # <-- Posisinya sekarang udah benar di dalam 'test'
+    steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
@@ -39,8 +39,9 @@ jobs:
       run: |
         # Buat database khusus testing
         mysql -h 127.0.0.1 -u root -e "CREATE DATABASE quiz_pengupil_test;"
-        # Import tabel dan data dummy ke database testing
-        mysql -h 127.0.0.1 -u root quiz_pengupil_test < quiz_pengupil.sql
+        
+        # Import tabel dan data dummy ke database testing dari folder db
+        mysql -h 127.0.0.1 -u root quiz_pengupil_test < db/quiz_pengupil.sql
         
         # INJECT STUB: Timpa koneksi asli dengan file stub
         mv koneksi_stub.php koneksi.php
