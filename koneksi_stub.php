@@ -1,9 +1,9 @@
 <?php
-// Ini adalah file STUB untuk kebutuhan isolasi testing
-$host = 'localhost';
+// GANTI host jadi 127.0.0.1 biar bisa konek via TCP di GitHub Actions
+$host = '127.0.0.1';
 $user = 'root';
 $password = '';
-$db = 'quiz_pengupil_test'; // Arahkan ke database khusus testing
+$db = 'quiz_pengupil_test';
 
 $con = mysqli_connect($host, $user, $password, $db);
 if (!$con) {
