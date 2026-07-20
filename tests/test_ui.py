@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
 # Setup base URL (akan berjalan di localhost port 8000 saat CI/CD)
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://127.0.0.1:8000"
 
 @pytest.fixture(scope="module")
 def driver():
