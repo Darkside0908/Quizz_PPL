@@ -5,7 +5,7 @@ on:
     branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
-workflow_dispatch:
+  workflow_dispatch: # Posisinya sudah sejajar di bawah 'on:'
 
 jobs:
   test:
@@ -37,7 +37,8 @@ jobs:
 
     - name: Import Database
       run: |
-        mysql -h 127.0.0.1 -u root quiz_pengupil < db.sql
+        # Nama file diubah dari db.sql menjadi quiz_pengupil.sql
+        mysql -h 127.0.0.1 -u root quiz_pengupil < quiz_pengupil.sql
 
     - name: Start PHP Built-in Server
       run: |
