@@ -25,7 +25,7 @@ jobs:
           --health-timeout=5s
           --health-retries=3
 
-    steps:
+steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
@@ -35,10 +35,15 @@ jobs:
         php-version: '8.0'
         extensions: mysqli
 
-    - name: Import Database
+    - name: Import Database & Inject Stub
       run: |
-        # Nama file diubah dari db.sql menjadi quiz_pengupil.sql
-        mysql -h 127.0.0.1 -u root quiz_pengupil < quiz_pengupil.sql
+        # Buat database khusus testing
+        mysql -h 127.0.0.1 -u root -e "CREATE DATABASE quiz_pengupil_test;"
+        # Import tabel dan data dummy ke database testing
+        mysql -h 127.0.0.1 -u root quiz_pengupil_test < quiz_pengupil.sql
+        
+        # INJECT STUB: Timpa koneksi asli dengan file stub
+        mv koneksi_stub.php koneksi.php
 
     - name: Start PHP Built-in Server
       run: |
